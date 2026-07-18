@@ -22,11 +22,12 @@ while True:
             Food_Menu1 = input("Food Menu: ")
             Name1 = input("Name of Owner: ")
             Address1 = input("Address of PG: ")
+            Area1 = input("Area:")
             Contact_No1 =input("For More Information Contact to This: ")
       
             details.append({"Category":"PG","Name":PGN,"Type":Type1,"Rent":Rent_Per_Month1,
                             "Deposite":Deposite1,"Time":Time1,"Food":Food_Menu1,"Owner":Name1,
-                            "Address":Address1,"Contact":Contact_No1})    
+                            "Address":Address1,"Area":Area1,"Contact":Contact_No1})    
 
         elif choice == "2":
             HN = input("Name of Hostel: ")
@@ -39,10 +40,11 @@ while True:
             Name2 = input("Name of Owner: ")
             name2 = input("Name of Warden: ")
             Address2 = input("Address of Hostel: ")
+            Area2 = input("Area:")
             Contact_No2=input("For More Information Contact to This: ")
             details.append({"Category":"Hostel","Name":HN,"Type":Type2,"Fees":Stay_Fees_Per_Month,"fees":Mess_Fees_Per_Month,
                             "Deposite":Deposite2,"Time":Time2,"Food":Food_Menu2,"Owner":Name2,"Warden":name2,
-                            "Address":Address2,"Contact":Contact_No2})  
+                            "Address":Address2,"Area":Area2,"Contact":Contact_No2})  
         elif choice == "3":
             RHFN = input("Name of House/Flat/Area/Apartment: ")
             Type3 = input("Type : ")
@@ -51,11 +53,12 @@ while True:
             Time3 = input("Timings: ")
             Name3 = input("Name of Owner: ")
             Address3 = input("Address : ")
+            Area3 = input("Area:")
             Contact_No3 =input("For More Information Contact to This: ")
     
             details.append({"Category":"Rental House/Flat","Name":RHFN,"Type":Type3,"Rent":Rent_Per_Month3,
                             "Deposite":Deposite3,"Time":Time3,"Owner":Name3,
-                            "Address":Address3,"Contact":Contact_No3})  
+                            "Address":Address3,"Area":Area3,"Contact":Contact_No3})  
         
 
     elif choice == "2":
@@ -78,24 +81,30 @@ while True:
               selected = "Hostel"
          elif Category == "3":
               selected = "Rental House/Flat"
+         else:
+             print("invalid Category!")
+             continue
+         Area = input("Enter Area: ")
 
          filtered = []
 
-         print("\nAvailable:")
          for item in details:
-            if item["Category"] == selected:
+            if item["Category"] == selected and item["Area"].lower() == Area.lower() :
                filtered.append(item)
-               print(f"{len(filtered)}. {item['Name']}")
+         if filtered:
+            print("\nAvailable:")
+            for i, item in enumerate(filtered, 1):
+                      
+                print(f"{len(filtered)}. {item['Name']}")
+            num = int(input("Select number: "))
+            if 1 <= num <= len(filtered):
+               item = filtered[num - 1]
 
-         num = int(input("Select number: "))
-
-         if 1 <= num <= len(filtered):
-            item = filtered[num - 1]
-
-            print("\n--- Details ---")
-            for key, value in item.items():
-                print(f"{key}: {value}")
-             
+               print("\n--- Details ---")
+               for key, value in item.items():
+                   print(f"{key}: {value}")
+         else:
+                print("Details are not Available in this Area!")  
     elif choice == "3":
         print("Thank You!")
         break
