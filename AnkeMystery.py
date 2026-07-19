@@ -55,9 +55,9 @@ while True:
             break
 
         if guess < secret:
-            print("⬆️ Low but....")
+            print("⬇️ Low but....")
         else:
-            print("⬇️ High but....")
+            print("⬆️ High but....")
 
         # Hot & Cold hints
         if diff <= 3:
