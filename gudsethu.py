@@ -1,3 +1,4 @@
+print("---WELCOME TO gudsethu---")
 details = []
 
 while True:
@@ -59,15 +60,10 @@ while True:
             details.append({"Category":"Rental House/Flat","Name":RHFN,"Type":Type3,"Rent":Rent_Per_Month3,
                             "Deposite":Deposite3,"Time":Time3,"Owner":Name3,
                             "Address":Address3,"Area":Area3,"Contact":Contact_No3})  
-        
-
     elif choice == "2":
          if len(details) == 0:
-             print("\n Welcome to gudsethu!")
              print("No Details Available!")
              continue
-         
-         print("\n Welcome to gudsethu!")
         
          print("1. PG")
          print("2. Hostel")
@@ -84,20 +80,35 @@ while True:
          else:
              print("invalid Category!")
              continue
-         Area = input("Enter Area: ")
-
-         filtered = []
+        
+         Category_data = []
 
          for item in details:
-            if item["Category"] == selected and item["Area"].lower() == Area.lower() :
+            if item["Category"] == selected :
+               Category_data.append(item)
+         
+         if not Category_data:
+            print("\n Details are Not Available")
+            continue
+         
+         Area = input("Enter Area: ")
+         
+         filtered = []
+         for item in Category_data:
+            if item["Area"].lower() == Area.lower() :
                filtered.append(item)
-         if filtered:
-            print("\nAvailable:")
-            for i, item in enumerate(filtered, 1):
-                      
+         if not filtered:
+            print("\n Details are Not Available")
+            continue
+         else:
+             print("\n Available:-")
+         
+         for i, item in enumerate(filtered, 1):      
                 print(f"{len(filtered)}. {item['Name']}")
-            num = int(input("Select number: "))
-            if 1 <= num <= len(filtered):
+         
+         num = int(input("Select number: "))
+         
+         if 1 <= num <= len(filtered):
                item = filtered[num - 1]
 
                print("\n--- Details ---")
@@ -105,6 +116,7 @@ while True:
                    print(f"{key}: {value}")
          else:
                 print("Details are not Available in this Area!")  
+    
     elif choice == "3":
         print("Thank You!")
         break
