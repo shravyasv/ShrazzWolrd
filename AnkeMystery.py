@@ -2,6 +2,7 @@ import random
 
 print("🎮 Welcome to AnkeMystery 🎮")
 print("..Guess and Win..🏆" )
+
 while True:
 
     print("\nChoose a Level")
@@ -74,5 +75,5 @@ while True:
     again = input("\nPlay Again? (yes/no): ").lower()
 
     if again != "yes":
-        print("\n👋 Thank You! Have a Good Day!")
+        print("\n👋 Thank You! Have a Good Day💞")
         break
