@@ -1,7 +1,6 @@
 import random
 
-print("🎮 Welcome to AnkeMystery 🎮")
-print("..Guess and Win..🏆" )
+print("🎮 Welcome  AnkeMystery 🎮")
 
 while True:
 
@@ -49,7 +48,7 @@ while True:
         diff = abs(secret - guess)
 
         if guess == secret:
-            print("\n🎉 Congratulations!")
+            print("\n🎉 Congratulations! you got it")
             print(f"✅ Correct Number: {secret}")
             print(f"🏆 Attempts: {attempts}")
             print("📜 Your Guesses:", history)
@@ -75,5 +74,5 @@ while True:
     again = input("\nPlay Again? (yes/no): ").lower()
 
     if again != "yes":
-        print("\n👋 Thank You! Have a Good Day💞")
+        print("\n👋 Thank You! Have a Great Day💞")
         break
