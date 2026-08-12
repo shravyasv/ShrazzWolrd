@@ -1,4 +1,4 @@
-print("---WELCOME TO gudsethu---")
+print("---💐WELCOME TO gudsethu🌉🛖---")
 details = []
 
 while True:
@@ -62,7 +62,7 @@ while True:
                             "Address":Address3,"Area":Area3,"Contact":Contact_No3})  
     elif choice == "2":
          if len(details) == 0:
-             print("No Details Available!")
+             print("No Details Available!👎")
              continue
         
          print("1. PG")
@@ -78,7 +78,7 @@ while True:
          elif Category == "3":
               selected = "Rental House/Flat"
          else:
-             print("invalid Category!")
+             print("invalid Category!❌")
              continue
         
          Category_data = []
@@ -88,7 +88,7 @@ while True:
                Category_data.append(item)
          
          if not Category_data:
-            print("\n Details are Not Available")
+            print("\n Details are Not Available👎")
             continue
          
          Area = input("Enter Area: ")
@@ -98,25 +98,25 @@ while True:
             if item["Area"].lower() == Area.lower() :
                filtered.append(item)
          if not filtered:
-            print("\n Details are Not Available")
+            print("\n Details are Not Available👎")
             continue
          else:
-             print("\n Available:-")
+             print("\n Available👍:-")
          
          for i, item in enumerate(filtered, 1):      
-                print(f"{len(filtered)}. {item['Name']}")
+                print(f"{i}. {item['Name']}")
          
          num = int(input("Select number: "))
          
          if 1 <= num <= len(filtered):
                item = filtered[num - 1]
 
-               print("\n--- Details ---")
+               print("\n--- Details🫠 ---")
                for key, value in item.items():
                    print(f"{key}: {value}")
          else:
-                print("Details are not Available in this Area!")  
+                print("Details are not Available in this Area!😞")  
     
     elif choice == "3":
-        print("Thank You!")
+        print("Thank You🙏!")
         break
