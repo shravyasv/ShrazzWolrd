@@ -12,6 +12,7 @@ while True:
         print("\n1.Paying Guest(pg)")
         print("2.Hostel")
         print("3.Rental House/Flat")
+        print("4.Hotel Room/Lodge")
         choice = input("Enter choice: ")
 
         if choice == "1":
@@ -47,7 +48,7 @@ while True:
                             "Deposite":Deposite2,"Time":Time2,"Food":Food_Menu2,"Owner":Name2,"Warden":name2,
                             "Address":Address2,"Area":Area2,"Contact":Contact_No2})  
         elif choice == "3":
-            RHFN = input("Name of House/Flat/Area/Apartment: ")
+            RHFN = input("Name of House/Flat/Apartment: ")
             Type3 = input("Type : ")
             Rent_Per_Month3 = float(input("Rent Per Month: "))
             Deposite3 = input("Deposite: ")
@@ -60,6 +61,17 @@ while True:
             details.append({"Category":"Rental House/Flat","Name":RHFN,"Type":Type3,"Rent":Rent_Per_Month3,
                             "Deposite":Deposite3,"Time":Time3,"Owner":Name3,
                             "Address":Address3,"Area":Area3,"Contact":Contact_No3})  
+        elif choice == "4":
+            HR_L = input("Name of Hotel/Lodge: ")
+            Type4 = input("Type : ")
+            Price= float(input("Price Per day: "))
+            Advance_Payment = input("Advance_payment:")
+            Address4 = input("Address : ")
+            Area4 = input("Area:")
+            Contact_No4 =input("For More Information Contact to This: ")
+            
+            details.append({"Category":"Hotel/Lodge","Name":HR_L,"Type":Type4,"Price":Price,
+                                    "Advance":Advance_Payment,"Address":Address4,"Area":Area4,"Contact":Contact_No4})  
     elif choice == "2":
          if len(details) == 0:
              print("No Details Available!👎")
@@ -68,6 +80,7 @@ while True:
          print("1. PG")
          print("2. Hostel")
          print("3. Rental House/Flat")
+         print("4. Hotel/Lodge")
 
          Category = input("Select Category: ")
 
@@ -77,6 +90,8 @@ while True:
               selected = "Hostel"
          elif Category == "3":
               selected = "Rental House/Flat"
+         elif Category == "4":
+              selected = "Hotel/Lodge"
          else:
              print("invalid Category!❌")
              continue
