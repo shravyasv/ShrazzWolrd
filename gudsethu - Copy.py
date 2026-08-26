@@ -1,137 +1,79 @@
-print("---💐WELCOME TO gudsethu🌉🛖---")
-details = []
+import json
+print("--- 💐 WELCOME TO gudsethu 🌉🛖 ---")
+try:
+    with open("details.json","r")as file:
+        details = json.load(file)
+except FileNotFoundError:
+    details = []
+
+fields = {
+    "PG": ["Name","Type", "Rent", "Deposit", "Timings", "Food", "Owner", "Address", "Area", "Contact"],
+    "Hostel": ["Name","Type", "Stay Fees", "Mess Fees", "Deposit", "Timings", "Food", "Owner", "Warden", "Address", "Area", "Contact"],
+    "Rental": ["Name","Type", "Rent", "Deposit", "Timings", "Owner", "Address", "Area", "Contact"],
+    "Hotel": ["Name","Type", "Price", "Advance", "Address", "Area", "Contact"]
+}
+
+def add(category):
+    d = {"Category": category}
+    d.update({f: input(f"{f}: ") for f in fields[category]})
+    details.append(d)
+    with open("details.json","w") as file:
+        json.dump(details,file,indent=4)
+def delete_details():
+    if not details:
+        print("No stored details found.")
+        return
+
+    print("\n--- Stored Details ---")
+    for i, x in enumerate(details, start=1):
+        print(f"{i}. {x.get('Category')} - {x.get('Name')} - {x.get('Area')} - {x.get('Type')}")
+
+    try:
+        num = int(input("\nEnter the number to delete: "))
+
+        if 1 <= num <= len(details):
+            removed = details.pop(num - 1)
+
+            with open("details.json", "w") as file:
+                json.dump(details, file, indent=4)
+
+            print(f"Deleted: {removed.get('Name')} ✅")
+        else:
+            print("Invalid number ❌")
+
+    except ValueError:
+        print("Please enter a valid number.")
 
 while True:
-    print("\n1.Member")
-    print("2.visitor")
-    print("3. Exit")
-
-    choice = input("Enter choice: ")
+    choice = input("\n1.Member\n2.Visitor\n3.Delete\n4.Exit\nChoice: ")
 
     if choice == "1":
-        print("\n1.Paying Guest(pg)")
-        print("2.Hostel")
-        print("3.Rental House/Flat")
-        print("4.Hotel Room/Lodge")
-        choice = input("Enter choice: ")
+        cat = input("Category (PG/Hostel/Rental/Hotel): ")
+        if cat in fields:
+            add(cat)
+            print("Added ✅")
+        else:
+            print("Invalid category ❌")
 
-        if choice == "1":
-            PGN = input("Name of PG: ")
-            Type1 = input("Type of PG: ")
-            Rent_Per_Month1 = float(input("Rent Per Month: "))
-            Deposite1 = float(input("Deposite: "))
-            Time1 = input("Timings: ")
-            Food_Menu1 = input("Food Menu: ")
-            Name1 = input("Name of Owner: ")
-            Address1 = input("Address of PG: ")
-            Area1 = input("Area:")
-            Contact_No1 =input("For More Information Contact to This: ")
-      
-            details.append({"Category":"PG","Name":PGN,"Type":Type1,"Rent":Rent_Per_Month1,
-                            "Deposite":Deposite1,"Time":Time1,"Food":Food_Menu1,"Owner":Name1,
-                            "Address":Address1,"Area":Area1,"Contact":Contact_No1})    
-
-        elif choice == "2":
-            HN = input("Name of Hostel: ")
-            Type2 = input("Type of Hostel: ")
-            Stay_Fees_Per_Month = float(input(" Stay Fees Per Month: "))
-            Mess_Fees_Per_Month = float(input("Mess Fees Per Month: "))
-            Deposite2 =input("Deposite: ")
-            Time2 = input("Timings: ")
-            Food_Menu2 = input("Food Menu: ")
-            Name2 = input("Name of Owner: ")
-            name2 = input("Name of Warden: ")
-            Address2 = input("Address of Hostel: ")
-            Area2 = input("Area:")
-            Contact_No2=input("For More Information Contact to This: ")
-            details.append({"Category":"Hostel","Name":HN,"Type":Type2,"Fees":Stay_Fees_Per_Month,"fees":Mess_Fees_Per_Month,
-                            "Deposite":Deposite2,"Time":Time2,"Food":Food_Menu2,"Owner":Name2,"Warden":name2,
-                            "Address":Address2,"Area":Area2,"Contact":Contact_No2})  
-        elif choice == "3":
-            RHFN = input("Name of House/Flat/Apartment: ")
-            Type3 = input("Type : ")
-            Rent_Per_Month3 = float(input("Rent Per Month: "))
-            Deposite3 = input("Deposite: ")
-            Time3 = input("Timings: ")
-            Name3 = input("Name of Owner: ")
-            Address3 = input("Address : ")
-            Area3 = input("Area:")
-            Contact_No3 =input("For More Information Contact to This: ")
-    
-            details.append({"Category":"Rental House/Flat","Name":RHFN,"Type":Type3,"Rent":Rent_Per_Month3,
-                            "Deposite":Deposite3,"Time":Time3,"Owner":Name3,
-                            "Address":Address3,"Area":Area3,"Contact":Contact_No3})  
-        elif choice == "4":
-            HR_L = input("Name of Hotel/Lodge: ")
-            Type4 = input("Type : ")
-            Price= float(input("Price Per day: "))
-            Advance_Payment = input("Advance_payment:")
-            Address4 = input("Address : ")
-            Area4 = input("Area:")
-            Contact_No4 =input("For More Information Contact to This: ")
-            
-            details.append({"Category":"Hotel/Lodge","Name":HR_L,"Type":Type4,"Price":Price,
-                                    "Advance":Advance_Payment,"Address":Address4,"Area":Area4,"Contact":Contact_No4})  
     elif choice == "2":
-         if len(details) == 0:
-             print("No Details Available!👎")
-             continue
-        
-         print("1. PG")
-         print("2. Hostel")
-         print("3. Rental House/Flat")
-         print("4. Hotel/Lodge")
+        cat, area, type = input("Category(PG/Hostel/Rental/Hotel):"), input("Area: "),input("Type(Boys👦 / Girls👧): ")
 
-         Category = input("Select Category: ")
+        found = [x for x in details
+                 if x.get("Category","").lower() == cat.lower()
+                 and x.get("Area", "").lower() == area.lower()
+                 and x.get("Type","").lower() == type.lower()]
 
-         if Category == "1":
-            selected = "PG"
-         elif Category == "2":
-              selected = "Hostel"
-         elif Category == "3":
-              selected = "Rental House/Flat"
-         elif Category == "4":
-              selected = "Hotel/Lodge"
-         else:
-             print("invalid Category!❌")
-             continue
-        
-         Category_data = []
+        if found:
+            for x in found:
+                print("\nAvailable details🫠\n")
+                print("\n".join(f"{k}: {v}" for k, v in x.items()
+                                if k!="Category" and k!="Area" and k!="Type"))
+        else:
+            print("Details are not available 👎")
 
-         for item in details:
-            if item["Category"] == selected :
-               Category_data.append(item)
-         
-         if not Category_data:
-            print("\n Details are Not Available👎")
-            continue
-         
-         Area = input("Enter Area: ")
-         
-         filtered = []
-         for item in Category_data:
-            if item["Area"].lower() == Area.lower() :
-               filtered.append(item)
-         if not filtered:
-            print("\n Details are Not Available👎")
-            continue
-         else:
-             print("\n Available👍:-")
-         
-         for i, item in enumerate(filtered, 1):      
-                print(f"{i}. {item['Name']}")
-         
-         num = int(input("Select number: "))
-         
-         if 1 <= num <= len(filtered):
-               item = filtered[num - 1]
-
-               print("\n--- Details🫠 ---")
-               for key, value in item.items():
-                   print(f"{key}: {value}")
-         else:
-                print("Details are not Available in this Area!😞")  
-    
     elif choice == "3":
-        print("Thank You🙏!")
+        delete_details()
+
+    elif choice == "4":
+        print("Thank You 🙏")
         break
