@@ -1,5 +1,10 @@
+import json
 print("--- 💐 WELCOME TO gudsethu 🌉🛖 ---")
-details = []
+try:
+    with open("details.json","r")as file:
+        details = json.load(file)
+except FileNotFoundError:
+    details = []
 
 fields = {
     "PG": ["Name","Type", "Rent", "Deposit", "Timings", "Food", "Owner", "Address", "Area", "Contact"],
@@ -12,6 +17,8 @@ def add(category):
     d = {"Category": category}
     d.update({f: input(f"{f}: ") for f in fields[category]})
     details.append(d)
+    with open("details.json","w") as file:
+        json.dump(details,file,indent=4)
 
 while True:
     choice = input("\n1.Member\n2.Visitor\n3.Exit\nChoice: ")
@@ -25,7 +32,7 @@ while True:
             print("Invalid category ❌")
 
     elif choice == "2":
-        cat, area, type = input("Category(PG/Hostel/Rental/Hotel):"), input("Area: "),input("Type(Boy👦 / Girl👧): ")
+        cat, area, type = input("Category(PG/Hostel/Rental/Hotel):"), input("Area: "),input("Type(Boys👦 / Girls👧): ")
 
         found = [x for x in details
                  if x.get("Category","").lower() == cat.lower()
